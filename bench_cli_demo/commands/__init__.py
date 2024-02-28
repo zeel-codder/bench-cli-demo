@@ -3,7 +3,7 @@ from .custom_commands.arguments import sum_of_two_numbers, operation_of_two_numb
 from .custom_commands.group import calculator
 from .custom_commands.db import insert_todo
 
-from .migration import rt_import
+from .importer import rt_import
 
 commands = [
     hello_world,

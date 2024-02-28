@@ -1,5 +1,5 @@
 import click
-from .job_applicant_migration.job_applicant import import_job_applicants
+from .job_applicant_import.job_applicant import import_job_applicants
 from .helpers.delete import delete_documents
 
 
