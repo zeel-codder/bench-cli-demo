@@ -20,6 +20,8 @@ def magic_delete_document(doctype, doc_name, docs_to_skip=set()):
     doc_key = f"{doctype} {doc_name}"
     if doc_key in docs_to_skip:
         return
+    
+    print(doc_key)
 
     try:
         doc_status = frappe.get_value(doctype, doc_name, "docstatus")
