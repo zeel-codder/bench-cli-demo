@@ -5,11 +5,14 @@ from ..site import init_site_decorate
 from .job_opening import import_job_opening, get_job_opening_exits
 from .interview_round import import_interview_round, get_interview_round_exits
 from rich.progress import Progress
+from ..helpers.utils import get_logger
 
 
 @click.command("import-job-applicant")
 @init_site_decorate
 def import_job_applicants():
+
+    logger = get_logger()
 
     file_path = frappe.conf.importer_csv_paths["job_applicant_data"]
 
@@ -24,9 +27,7 @@ def import_job_applicants():
         counter = 0
 
         with Progress() as progress:
-            task = progress.add_task(
-                "[cyan]Importing Job Applicant...", total=len(list(reader))
-            )
+            task = progress.add_task("[cyan]Importing Job Applicant...", total=20000)
 
             for row in reader:
                 job_applicant_data = {
@@ -43,6 +44,8 @@ def import_job_applicants():
                     ],
                 }
 
+                logger.info(f"Importing Job Applicant: {job_applicant_data['email']}")
+
                 import_job_applicant(job_applicant_data)
 
                 progress.update(task, advance=1)
@@ -57,6 +60,8 @@ def import_job_applicants():
 
 
 def import_job_applicant(job_applicant_data):
+    logger = get_logger()
+
     job_opening = get_job_opening_exits(job_applicant_data["job"])
 
     if not job_opening:
@@ -73,6 +78,8 @@ def import_job_applicant(job_applicant_data):
 
     job_applicant.insert()
 
+    logger.info(f"Job Applicant {job_applicant.name} is inserted successfully!")
+
     if "interviews" in job_applicant_data:
         import_interviews(job_applicant_data["interviews"], job_applicant)
 
@@ -80,6 +87,8 @@ def import_job_applicant(job_applicant_data):
 
 
 def import_interviews(interviews, job_applicant):
+    logger = get_logger()
+
     if not interviews:
         return
 
@@ -101,3 +110,7 @@ def import_interviews(interviews, job_applicant):
         )
 
         interview.insert()
+
+        logger.info(
+            f"Interview {interview.name} for {job_applicant.name} is inserted successfully!"
+        )

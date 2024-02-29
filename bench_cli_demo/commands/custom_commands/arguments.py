@@ -1,6 +1,20 @@
 import click
 
 
+"""
+Run Command:
+
+1.
+bench sum 20 2
+
+2.
+bench operation --help
+bench operation 12 2 --type div
+bench operation 12 2 --type sum
+bench operation --type sub 12 2
+
+"""
+
 @click.command("sum")
 @click.argument("number1", type=int)
 @click.argument("number2", type=int)
@@ -31,18 +45,3 @@ def operation_of_two_numbers(number1, number2, type):
             result = "Error: Division by zero"
 
     print(f"{type} = {result}")
-
-
-"""
-Run Command:
-
-1.
-bench sum 20 2
-
-2.
-bench operation --help
-bench operation 12 2 --type div
-bench operation 12 2 --type sum
-bench operation --type sub 12 2
-
-"""

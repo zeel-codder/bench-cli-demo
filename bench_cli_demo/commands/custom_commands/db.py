@@ -2,6 +2,13 @@ import frappe
 import click
 from frappe.commands import get_site, pass_context
 
+"""Run Command:
+
+bench --site migration.localhost insert-todo
+bench use migration.localhost
+bench insert-todo --description "This is test todo"
+"""
+
 
 @click.command("insert-todo")
 @click.option("--description", default="Test", help="Description for the ToDo")
@@ -32,9 +39,4 @@ def insert_todo(context, description, status):
         frappe.destroy()
 
 
-"""Run Command:
 
-bench --site migration.localhost insert-todo
-bench use migration.localhost
-bench insert-todo --description "This is test todo"
-"""

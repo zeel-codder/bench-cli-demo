@@ -1,5 +1,12 @@
 import click
 
+"""
+Run Command:
+
+bench calculator
+bench calculator sum 20 2
+bench calculator sub 20 2
+"""
 
 @click.group("calculator")
 def calculator():
@@ -36,10 +43,3 @@ def mul_of_two_numbers(number1, number2):
     print(f"Multiplication of given two number = {number1*number2}")
 
 
-"""
-Run Command:
-
-bench calculator
-bench calculator sum 20 2
-bench calculator sub 20 2
-"""

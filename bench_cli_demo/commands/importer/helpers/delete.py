@@ -1,7 +1,7 @@
 import frappe
 import click
 from ..site import init_site_decorate
-
+from ..helpers.utils import get_logger
 
 @click.command("delete-documents")
 @click.argument("doctype", type=str)
@@ -17,11 +17,14 @@ def delete_documents(doctype):
 
 
 def magic_delete_document(doctype, doc_name, docs_to_skip=set()):
+
+    logger=get_logger()
+
     doc_key = f"{doctype} {doc_name}"
     if doc_key in docs_to_skip:
         return
     
-    print(doc_key)
+    logger.info(f"Deleting {doc_key}")
 
     try:
         doc_status = frappe.get_value(doctype, doc_name, "docstatus")
