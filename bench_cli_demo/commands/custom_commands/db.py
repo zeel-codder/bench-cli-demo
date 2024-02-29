@@ -30,6 +30,8 @@ def insert_todo(context, description, status):
 
         todo.insert()
 
+        print("ToDo inserted successfully")
+
     except Exception as e:
         print("Please specify --site sitename")
     finally:
