@@ -3,9 +3,7 @@ import click
 from frappe.commands import get_site, pass_context
 
 """Run Command:
-
-bench --site migration.localhost insert-todo
-bench use migration.localhost
+bench use bench-cli-demo.localhost
 bench insert-todo --description "This is test todo"
 """
 
