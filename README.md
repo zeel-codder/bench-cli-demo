@@ -35,18 +35,10 @@ bench use bench-cli-demo.localhost
 
 1. Download any CSV data from [here](https://drive.google.com/drive/folders/1eYJ6KXJf_3m3usGwYXb9_4wal7RCZr3x?usp=sharing) and move the file to the `frappe-bench` folder.
 
-2. Define the file path in `common_site_config.json`:
-
-```json
-    "importer_csv_paths":{
-        "job_applicant_data":"/workspace/frappe-bench/job_applicant_data_20K.csv"
-    }
-```
-
-3. Run the import command:
+2. Run the import command:
 
 ```bash
-bench rt-import import-job-applicant
+bench rt-import import-job-applicant {file_path}
 ```
 
 ## License

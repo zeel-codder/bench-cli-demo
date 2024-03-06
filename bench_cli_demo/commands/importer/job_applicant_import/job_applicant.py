@@ -8,13 +8,16 @@ from rich.progress import Progress
 from ..helpers.utils import get_logger
 
 
+"""
+Exmple:
+bench rt-import import-job-applicant /workspace/frappe-bench/job_applicant_data_20K.csv
+"""
 @click.command("import-job-applicant")
+@click.argument('file_path', type=click.Path(exists=True))
 @init_site_decorate
-def import_job_applicants():
+def import_job_applicants(file_path):
 
     logger = get_logger()
-
-    file_path = frappe.conf.importer_csv_paths["job_applicant_data"]
 
     if not file_path:
         print("Please specify the file path in the common_site_config.json")

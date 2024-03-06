@@ -8,10 +8,10 @@ Run Command:
 bench sum 20 2
 
 2.
-bench operation --help
-bench operation 12 2 --type div
-bench operation 12 2 --type sum
-bench operation --type sub 12 2
+bench arithmetic --help
+bench arithmetic 12 2 --operation div
+bench arithmetic 12 2 --operation sum
+bench arithmetic --operation sub 12 2
 
 """
 
@@ -22,26 +22,26 @@ def sum_of_two_numbers(number1, number2):
     print(f"Sum of given two number = {number1+number2}")
 
 
-@click.command("operation", help="Perform operation on given two numbers")
+@click.command("arithmetic", help="Perform operation on given two numbers")
 @click.argument("number1", type=int)
 @click.argument("number2", type=int)
 @click.option(
-    "--type",
+    "--operation",
     type=click.Choice(["div", "mul", "sub", "sum"]),
     default="sum",
     help="Operation to perform on given two numbers",
 )
-def operation_of_two_numbers(number1, number2, type):
-    if type == "sum":
+def arithmetic(number1, number2, operation):
+    if operation == "sum":
         result = number1 + number2
-    elif type == "sub":
+    elif operation == "sub":
         result = number1 - number2
-    elif type == "mul":
+    elif operation == "mul":
         result = number1 * number2
-    elif type == "div":
+    elif operation == "div":
         if number2 != 0:
             result = number1 / number2
         else:
             result = "Error: Division by zero"
 
-    print(f"{type} = {result}")
+    print(f"{operation} = {result}")
